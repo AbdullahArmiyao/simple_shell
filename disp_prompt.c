@@ -4,10 +4,10 @@
  * disp_prompt - Function that prints prompt
 */
 
-void disp_prompt()
+void disp_prompt(void)
 {
     /**
      * display the prompt
     */
-    write(STDOUT_FILENO, "#cisfun$ ", 10);
+	write(STDOUT_FILENO, "#cisfun$ ", 10);
 }
