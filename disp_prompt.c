@@ -1,7 +1,7 @@
 #include "shell.h"
 
 /**
- * pnt_err_mess - Function that prints error message
+ * disp_prompt - Function that prints prompt
 */
 
 void disp_prompt()

@@ -23,9 +23,8 @@ int main()
             break;
         }
 
-        buffer[strcspn(buffer, "\n")] = '\0';
-
-        exec_cmd(buffer);
+        buffer[_strcspn(buffer, "\n")] = '\0';
+        process_input(buffer);
     }
 
     return (0);
