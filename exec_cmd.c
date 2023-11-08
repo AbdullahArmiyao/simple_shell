@@ -44,6 +44,7 @@ void _execute(char *arguments[])
 	{
 		/* initialze parent process */
 		int status;
+
 		waitpid(pid, &status, 0);
 	}
 }

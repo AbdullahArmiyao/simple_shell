@@ -24,6 +24,7 @@ char *_path(char *command)
 			* the directory and command length, 1 for '/' and 1 for '\0'
 		*/
 		char *full_path = malloc(dir_len + 1 + cmd_len + 1);
+
 		if (full_path == NULL)
 		{
 			free(path_copy);
