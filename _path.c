@@ -8,8 +8,7 @@
 
 char *_path(char *command)
 {
-	char *path = "/usr/bin:/bin";  /* PATH  */
-	char *path_copy = strdup(path);  /* PATH  */
+	char *path = "/usr/bin:/bin", *path_copy = strdup(path);  /* PATH  */
 	char *dir = strtok(path_copy, ":");
 	char *result = NULL;
 
