@@ -23,31 +23,27 @@ void _execute(char *arguments[])
 	else if (pid == 0)
 	{
 		/* begin child process */
-		/* if the command fails with execvp, print error message*/
-
+		/* if the command fails with execvp, print error message */
 		if (cmd_with_path != NULL)
 		{
 			if (execve(cmd_with_path, arguments, NULL) == -1)
 			{
 				perror("execve");
 				free(cmd_with_path);
-				/* exit child process */
-				exit(EXIT_FAILURE);
+				exit(EXIT_FAILURE);/* exit child process */
 			}
 			free(cmd_with_path);
 		}
 		else
 		{
-			/*print command not found*/
-            write(STDERR_FILENO, err_msg, strlen(err_msg));
-            exit(EXIT_FAILURE);
+			write(STDERR_FILENO, err_msg, strlen(err_msg));
+			exit(EXIT_FAILURE);
 		}
 	}
 	else
 	{
 		/* initialze parent process */
 		int status;
-
 		waitpid(pid, &status, 0);
 	}
 }

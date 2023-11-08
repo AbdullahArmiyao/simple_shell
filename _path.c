@@ -15,29 +15,24 @@ char *_path(char *command)
 
 	if (command == NULL)
 		return (result);
-	/* Iterating through each directory in PATH */
-	while (dir != NULL)
+	while (dir != NULL)/* Iterating through each directory in PATH */
 	{
 		size_t dir_len = strlen(dir);  /* Calculate length of directory path*/
 		size_t cmd_len = strlen(command); /*Calculate length of the command*/
-
 		/*
 			* Allocate memory for the full path by considering
 			* the directory and command length, 1 for '/' and 1 for '\0'
 		*/
 		char *full_path = malloc(dir_len + 1 + cmd_len + 1);
-
 		if (full_path == NULL)
 		{
-			free (path_copy);
+			free(path_copy);
 			return (NULL);  /*Return NULL if malloc fails*/
 		}
-
 		/*Construct the full path by appending the directory and the command*/
 		strcpy(full_path, dir);  /*Copy directory path to full path string*/
 		full_path[dir_len] = '/';  /*Add '/' between directory and command*/
 		strcpy(full_path + dir_len + 1, command); /*Append command after '/'*/
-
 		/*Check if the command is executable within the current directory*/
 		if (access(full_path, X_OK) != -1)
 		{
