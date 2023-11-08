@@ -11,7 +11,7 @@ int main(void)
 
 	while (1)
 	{
-		disp_prompt();
+		_prompt();
 
 		if (fgets(buffer, BUFF_SIZE, stdin) == NULL)
 		{
@@ -20,7 +20,7 @@ int main(void)
 		}
 
 
-		buffer[_strcspn(buffer, "\n")] = '\0';
+		buffer[strcspn(buffer, "\n")] = '\0';
 		process_input(buffer);
 	}
 

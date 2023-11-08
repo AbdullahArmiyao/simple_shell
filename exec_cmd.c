@@ -1,29 +1,46 @@
 #include "shell.h"
 
 /**
- * exec_cmd - function responsible for the execution of the command
+ * _execute - function responsible for the execution of the command
  * @arguments: user input
 */
 
-void exec_cmd(char *arguments[])
+void _execute(char *arguments[])
 {
+	char *cmd_with_path = _path(arguments[0]);
+	char *err_msg = "command not found\n";
 	/* call the fork system call */
 	pid_t pid = fork();
 	/* if there is no command, return */
 	if (arguments[0] == NULL)
+	{
+		write(STDERR_FILENO, err_msg, strlen(err_msg));
 		return;
+	}
 	/* if fork fails, print the error message */
-	if (pid == -1)
+	if (pid < 0)
 		perror("fork");
 	else if (pid == 0)
 	{
 		/* begin child process */
 		/* if the command fails with execvp, print error message*/
-		if (execve(arguments[0], arguments, NULL) == -1)
+
+		if (cmd_with_path != NULL)
 		{
-			perror("execve");
-			/* exit child process */
-			exit(EXIT_FAILURE);
+			if (execve(cmd_with_path, arguments, NULL) == -1)
+			{
+				perror("execve");
+				free(cmd_with_path);
+				/* exit child process */
+				exit(EXIT_FAILURE);
+			}
+			free(cmd_with_path);
+		}
+		else
+		{
+			/*print command not found*/
+            write(STDERR_FILENO, err_msg, strlen(err_msg));
+            exit(EXIT_FAILURE);
 		}
 	}
 	else
